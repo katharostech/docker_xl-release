@@ -1,0 +1,27 @@
+version: '3'
+networks:
+  default:
+    external:
+      name: mssql_default
+services:
+    xlr-node1:
+        image: kadimasolutions/xl-release:trial_1.0.0
+        environment:
+            xlr_cluster_mode: full
+            xlr_cluster_name: xlrcluster
+        volumes:
+            - /tmp/xlr.env.scrt:/secrets/xlr.env.scrt:z
+            - /tmp/xl-release-license.lic:/license/xl-release-license.lic:z
+        ports:
+            - 5516:5516
+
+    xlr-node2:
+        image: kadimasolutions/xl-release:trial_1.0.0
+        environment:
+            xlr_cluster_mode: full
+            xlr_cluster_name: xlrcluster
+        volumes:
+            - /tmp/xlr.env.scrt:/secrets/xlr.env.scrt:z
+            - /tmp/xl-release-license.lic:/license/xl-release-license.lic:z
+        ports:
+            - 5517:5516

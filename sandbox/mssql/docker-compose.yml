@@ -1,0 +1,14 @@
+version: '3'
+services:
+    sqlbackend:
+        image: microsoft/mssql-server-linux:latest
+        environment:
+            ACCEPT_EULA: Y
+        ports:
+            - ${MSSQL_PORT}:1433
+        volumes:
+            - /tmp/mssqldevdb.scrt:/secrets/mssqldevdb.scrt:z
+        entrypoint:
+            - sh
+            - -c
+            - ". /secrets/mssqldevdb.scrt && /opt/mssql/bin/sqlservr"
